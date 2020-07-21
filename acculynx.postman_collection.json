@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "81f0224f-3a4f-41f9-93f7-415a4687078f",
+		"name": "acculynx",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "dev tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "26eb115f-d1f2-4b86-9382-104ebfaa6449",
+						"exec": [
+							"pm.test(\"FirstName Requirement\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.errors[0].value.firstName).to.eql([\"The firstName field is required.\"]);",
+							"});",
+							"",
+							"pm.test(\"Status code is 202\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});",
+							"",
+							"pm.test(\"intersection\", function(){",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.errors[0].value.firstName).to.eql([\"The firstName field is required.\"]);",
+							"    pm.response.to.have.status(202);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{prod_key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstname\": \"\", \n  \"lastname\": \"\",\n  \"address\": \"\",\n  \"city\": \"\",  \n  \"stateProvince\": \"\",\n  \"postalCode\": \"\",\n  \"primaryPhone\": \"\",\n  \"secondaryPhone\": \"\",\n  \"phoneExt\": \"\",\n  \"secondaryPhoneExt\": \"\",\n  \"email\": \"\",\n  \"comments\": \"\",\n  \"crmKey\": \"{{prod_key}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{prod}}/api/v1/leads/import-homeadvisor-lead/",
+					"protocol": "https",
+					"host": [
+						"{{prod}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"leads",
+						"import-homeadvisor-lead",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "48e63795-26cd-470c-876f-5f1eaf6dc0c0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "695e5b3b-210d-48a9-9332-66851a3d0b20",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "5502bbf4-d0f0-4d94-a192-497506ec4ffd",
+			"key": "dev",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "4bbc5e35-4e09-46c9-887b-da69b9c2df56",
+			"key": "prod",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "1d6abf8a-3ff5-4d9b-8ad4-911261be782e",
+			"key": "dev_key",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "5c0c5cae-5ab9-4b39-8919-e0ddb8b84753",
+			"key": "prod_key",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
